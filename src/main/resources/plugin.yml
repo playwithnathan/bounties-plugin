@@ -1,0 +1,11 @@
+name: Bounties
+version: 1.0
+main: me.playwithnathan.Bounties
+api-version: 1.17
+depend: [ Vault, PlaceholderAPI ]
+authors: [ playwithnathan ]
+description: A bounties plugin
+commands:
+  bounties:
+    description: "Use the bounties plugin"
+    usage: "/bounties"
