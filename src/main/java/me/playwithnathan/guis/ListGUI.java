@@ -1,9 +1,6 @@
 package me.playwithnathan.guis;
 
-import me.playwithnathan.util.DataUtil;
-import me.playwithnathan.util.GUI;
-import me.playwithnathan.util.GUITracker;
-import me.playwithnathan.util.TextUtil;
+import me.playwithnathan.util.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -46,15 +43,15 @@ public class ListGUI extends GUI {
         for(Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             if(startCounter >= startAt) {
                 // Player must give consent
-                if(DataUtil.noConsent(onlinePlayer)) continue;
+                if(ConsentUtil.noHave(onlinePlayer)) continue;
 
                 // Player doesn't have a bounty on them
-                if(!DataUtil.has(onlinePlayer)) continue;
+                if(!BountyUtil.has(onlinePlayer)) continue;
 
                 // Player is the target
-                if(player.equals(onlinePlayer)) continue;
+                //if(player.equals(onlinePlayer)) continue;
 
-                String bounties = DataUtil.get(onlinePlayer);
+                String bounties = BountyUtil.get(onlinePlayer);
                 double money = Double.parseDouble(bounties.split(":")[1]);
 
                 // Create the item
@@ -63,7 +60,7 @@ public class ListGUI extends GUI {
                 assert playerHeadMeta != null;
                 playerHeadMeta.setOwningPlayer(onlinePlayer);
                 playerHeadMeta.setDisplayName(TextUtil.color("&7"+onlinePlayer.getDisplayName()));
-                playerHeadMeta.setLore(TextUtil.colorLore(Arrays.asList("&6"+onlinePlayer.getName(), "&a$"+money)));
+                playerHeadMeta.setLore(TextUtil.colorLore(Arrays.asList("&7Username: &c"+onlinePlayer.getName(), "&7Money: &a$"+money)));
                 playerHead.setItemMeta(playerHeadMeta);
 
                 // Add item
@@ -87,10 +84,10 @@ public class ListGUI extends GUI {
     public void onInventoryClick(Player player, String itemName) {
         for(Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             // Player must give consent
-            if(DataUtil.noConsent(onlinePlayer)) continue;
+            if(ConsentUtil.noHave(onlinePlayer)) continue;
 
             // Player doesn't have a bounty on them
-            if(!DataUtil.has(onlinePlayer)) continue;
+            if(!BountyUtil.has(onlinePlayer)) continue;
 
             // Paging
             String guiTitle = TextUtil.removeColor(gui.invTitle);

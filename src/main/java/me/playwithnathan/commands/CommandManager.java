@@ -1,7 +1,7 @@
 package me.playwithnathan.commands;
 
 import me.playwithnathan.Bounties;
-import me.playwithnathan.util.DataUtil;
+import me.playwithnathan.util.ConsentUtil;
 import me.playwithnathan.util.PlayerUtil;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.command.Command;
@@ -16,15 +16,13 @@ import java.util.List;
 public class CommandManager implements CommandExecutor {
     private static final Permission perms = Bounties.getPermissions();
 
-    public boolean onCommand(@NotNull CommandSender sender, Command cmd, @NotNull String label, String[] args) {
-        if(!cmd.getName().equalsIgnoreCase("bounties")) return true;
-
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         // Sender must be player
         if(!(sender instanceof Player)) return true;
         Player player = (Player) sender;
 
         // Consent form
-        if(DataUtil.noConsent(player)) {
+        if(ConsentUtil.noHave(player)) {
             // The consent command
             if(args.length != 0)
                 if(args[0].equalsIgnoreCase("consent")) {
@@ -59,8 +57,8 @@ public class CommandManager implements CommandExecutor {
             case "list":
                 new ListCommand(player, newArgs);
                 break;
-            case "new":
-                new NewCommand(player, newArgs);
+            case "set":
+                new SetCommand(player, newArgs);
                 break;
             case "unconsent":
                 if(perms.has(player, "staff.mod"))

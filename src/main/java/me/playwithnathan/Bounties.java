@@ -40,7 +40,9 @@ public final class Bounties extends JavaPlugin {
 
         // Commands
         Objects.requireNonNull(this.getCommand("bounties")).setExecutor(new CommandManager());
+        Objects.requireNonNull(this.getCommand("bounty")).setExecutor(new CommandManager());
         Objects.requireNonNull(this.getCommand("bounties")).setTabCompleter(new TabComplete());
+        Objects.requireNonNull(this.getCommand("bounty")).setTabCompleter(new TabComplete());
 
         // Events
         registerEvent(new InvClick());
@@ -48,7 +50,7 @@ public final class Bounties extends JavaPlugin {
         registerEvent(new KillPlayer());
 
         // Schedulers
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new ServerAssigner(), 20*60 * 20, 20*60 * 20); // 20*60 = 1min
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new ServerAssigner(), 20*60 * 10, 20*60 * 60); // 20*60 = 1min
 
         // Plugin is on
         getLogger().info(TextUtil.color("&aPlugin Enabled"));
