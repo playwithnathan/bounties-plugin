@@ -11,7 +11,7 @@ However, if you would like to participate in bounties, the first thing you must 
 
 At anytime you can use /bounties help to be presented with the following information:
 - `/bounties list` Displays all the current bounties.
-- `/bounties set <player>` <amount> Set a bounty on a player.
+- `/bounties set <player> <amount>` Set a bounty on a player.
 
 Server bounties are assigned hourly.
 Who gets picked and the amount of money are both partially dependent on the player's score.
